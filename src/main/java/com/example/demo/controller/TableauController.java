@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import com.example.demo.entity.Collection;
 import com.example.demo.entity.Tableau;
 import com.example.demo.repository.TableauRepository;
 import org.springframework.beans.factory.annotation.Autowired;
