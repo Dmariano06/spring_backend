@@ -5,17 +5,29 @@ import javax.persistence.*;
 @Entity
 @Table(name = "tableaux")
 public class Tableau {
+
+    @Column(name="nom")
+    private String nom;
+
+    @Column(name="image")
+    private String image;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "description")
     private String description;
-    @Column(name="nom")
-    private String nom;
 
     @Column(name="prix")
     private Long prix;
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
 
     @Column(name="collection")
     private String collection;
