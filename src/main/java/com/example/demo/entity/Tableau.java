@@ -9,6 +9,17 @@ public class Tableau {
     @Column(name="nom")
     private String nom;
 
+    public Collection getCollection() {
+        return collection;
+    }
+
+    public void setCollection(Collection collection) {
+        this.collection = collection;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "collection_id")
+    private Collection collection;
     @Column(name="image")
     private String image;
     @Id
@@ -29,16 +40,6 @@ public class Tableau {
         this.image = image;
     }
 
-    @Column(name="collection")
-    private String collection;
-
-    public String getCollection() {
-        return collection;
-    }
-
-    public void setCollection(String collection) {
-        this.collection = collection;
-    }
 
     public Number getPrix() {
         return prix;
