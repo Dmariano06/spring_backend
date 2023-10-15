@@ -15,11 +15,13 @@ import java.util.List;
 
 @CrossOrigin(origins = "*")
 @RestController
+@RequestMapping("tableau")
 public class TableauController {
     @Autowired
     private TableauService tableauService;
     @Autowired
     private CollectionService collectionService;
+
     public TableauController(TableauService tableauService) {
         this.tableauService = tableauService;
     }
@@ -31,14 +33,14 @@ public class TableauController {
         return tableauService.findById(id).orElse(null);
     }*/
 
-
-    @PostMapping
+    @CrossOrigin(origins = "*")
+    @PostMapping("/tableau")
     public ResponseEntity<Tableau> createTableau(@RequestBody Tableau tableau) {
         Tableau createdTableau = tableauService.saveTableau(tableau);
         return new ResponseEntity<>(createdTableau, HttpStatus.CREATED);
     }
     @CrossOrigin(origins = "*")
-    @PutMapping("/tableau")
+    @PutMapping("/tableau/{id]")
     public Tableau updateTableau(@PathVariable Long id, @RequestBody Tableau tableau) {
         tableau.setId(id);
         return tableauService.saveTableau(tableau);
