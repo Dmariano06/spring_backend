@@ -15,7 +15,7 @@ import java.util.List;
 
 @CrossOrigin(origins = "*")
 @RestController
-@RequestMapping("/tableaux")
+@RequestMapping("/api/tableaux")
 public class TableauController {
     @Autowired
     private TableauService tableauService;
@@ -40,7 +40,7 @@ public class TableauController {
         return new ResponseEntity<>(createdTableau, HttpStatus.CREATED);
     }
     @CrossOrigin(origins = "*")
-    @PutMapping("/tableau/{id]")
+    @PutMapping("/{id}")
     public Tableau updateTableau(@PathVariable Long id, @RequestBody Tableau tableau) {
         tableau.setId(id);
         return tableauService.saveTableau(tableau);
