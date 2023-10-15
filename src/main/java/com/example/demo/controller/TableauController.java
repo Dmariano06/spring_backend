@@ -15,7 +15,7 @@ import java.util.List;
 
 @CrossOrigin(origins = "*")
 @RestController
-@RequestMapping("tableaux")
+@RequestMapping("/tableaux")
 public class TableauController {
     @Autowired
     private TableauService tableauService;
