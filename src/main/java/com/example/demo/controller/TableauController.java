@@ -15,7 +15,7 @@ import java.util.List;
 
 @CrossOrigin(origins = "*")
 @RestController
-@RequestMapping("tableau")
+@RequestMapping("tableaux")
 public class TableauController {
     @Autowired
     private TableauService tableauService;
@@ -34,7 +34,7 @@ public class TableauController {
     }*/
 
     @CrossOrigin(origins = "*")
-    @PostMapping("/tableau")
+    @PostMapping
     public ResponseEntity<Tableau> createTableau(@RequestBody Tableau tableau) {
         Tableau createdTableau = tableauService.saveTableau(tableau);
         return new ResponseEntity<>(createdTableau, HttpStatus.CREATED);
@@ -47,7 +47,7 @@ public class TableauController {
     }
 
     @CrossOrigin(origins = "*")
-    @GetMapping("/tableau")
+    @GetMapping
     public List<Tableau> getAllTableaux() {
         return tableauService.getAllTableaux();
     }
