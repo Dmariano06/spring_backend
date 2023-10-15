@@ -10,8 +10,19 @@ public class Tableau {
     private Long id;
 
     private String nom;
-    private String collection;
+
     private String description;
+    @ManyToOne
+    @JoinColumn(name = "collection_id")
+    private Collection collection;
+
+    public Collection getCollection() {
+        return collection;
+    }
+
+    public void setCollection(Collection collection) {
+        this.collection = collection;
+    }
 
     public String getNom() {
         return nom;
@@ -21,13 +32,6 @@ public class Tableau {
         this.nom = nom;
     }
 
-    public String getCollection() {
-        return collection;
-    }
-
-    public void setCollection(String collection) {
-        this.collection = collection;
-    }
 
     public String getDescription() {
         return description;

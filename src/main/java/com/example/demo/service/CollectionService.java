@@ -11,6 +11,13 @@ public class CollectionService {
     @Autowired
     private CollectionRepository collectionRepository;
 
+    public CollectionService(CollectionRepository collectionRepository) {
+        this.collectionRepository = collectionRepository;
+    }
+    public Collection createCollection(Collection collection) {
+        return collectionRepository.save(collection);
+    }
+
     public List<Collection> getAllCollections() {
         return collectionRepository.findAll();
     }

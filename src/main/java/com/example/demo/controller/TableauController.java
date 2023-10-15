@@ -7,6 +7,7 @@ import com.example.demo.repository.TableauRepository;
 import com.example.demo.service.CollectionService;
 import com.example.demo.service.TableauService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,6 +20,10 @@ public class TableauController {
     private TableauService tableauService;
     @Autowired
     private CollectionService collectionService;
+    public TableauController(TableauService tableauService) {
+        this.tableauService = tableauService;
+    }
+
 
  /*   @CrossOrigin(origins = "*")
     @GetMapping("/tableau/{id}")
@@ -26,10 +31,11 @@ public class TableauController {
         return tableauService.findById(id).orElse(null);
     }*/
 
-    @CrossOrigin(origins = "*")
-    @PostMapping("/tableau")
-    public Tableau createTableau(@RequestBody Tableau tableau) {
-        return tableauService.saveTableau(tableau);
+
+    @PostMapping
+    public ResponseEntity<Tableau> createTableau(@RequestBody Tableau tableau) {
+        Tableau createdTableau = tableauService.saveTableau(tableau);
+        return new ResponseEntity<>(createdTableau, HttpStatus.CREATED);
     }
     @CrossOrigin(origins = "*")
     @PutMapping("/tableau")
@@ -43,16 +49,13 @@ public class TableauController {
     public List<Tableau> getAllTableaux() {
         return tableauService.getAllTableaux();
     }
-    @CrossOrigin(origins = "*")
-    @PostMapping("/collections")
-    public Collection createCollection(@RequestBody Collection collection) {
-        return collectionService.saveCollection(collection);
-    }
+
 
     @CrossOrigin(origins = "*")
-    @GetMapping("/collections")
-    public List<Collection> getAllCollections() {
-        return collectionService.getAllCollections();
+    @GetMapping("/byCollection/{collectionId}")
+    public ResponseEntity<List<Tableau>> getTableauxByCollection(@PathVariable Long collectionId) {
+        List<Tableau> tableaux = tableauService.getTableauxByCollectionId(collectionId);
+        return new ResponseEntity<>(tableaux, HttpStatus.OK);
     }
   /*  @CrossOrigin(origins = "*")
     @DeleteMapping("/tableau/{id}")
