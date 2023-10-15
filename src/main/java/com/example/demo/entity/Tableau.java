@@ -16,8 +16,19 @@ public class Tableau {
     @JoinColumn(name = "collection_id")
     private Collection collection;
 
+    @Column(name = "collectionbyid")
+    private Long collectionId;
+
     public Collection getCollection() {
         return collection;
+    }
+
+    public Long getCollectionId() {
+        return collectionId;
+    }
+
+    public void setCollectionId(Long collectionId) {
+        this.collectionId = collectionId;
     }
 
     public void setCollection(Collection collection) {

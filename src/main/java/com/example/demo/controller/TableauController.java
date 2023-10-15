@@ -34,10 +34,17 @@ public class TableauController {
     }*/
 
     @CrossOrigin(origins = "*")
-    @PostMapping
+    @PostMapping("/create")
     public ResponseEntity<Tableau> createTableau(@RequestBody Tableau tableau) {
-        Tableau createdTableau = tableauService.saveTableau(tableau);
-        return new ResponseEntity<>(createdTableau, HttpStatus.CREATED);
+        try {
+
+            Collection collection = collectionService.getCollectionById(tableau.getCollectionId());
+            Tableau createdTableau = tableauService.saveTableau(tableau);
+            return new ResponseEntity<>(createdTableau, HttpStatus.CREATED);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
     @CrossOrigin(origins = "*")
     @PutMapping("/{id}")
@@ -59,10 +66,5 @@ public class TableauController {
         List<Tableau> tableaux = tableauService.getTableauxByCollectionId(collectionId);
         return new ResponseEntity<>(tableaux, HttpStatus.OK);
     }
-  /*  @CrossOrigin(origins = "*")
-    @DeleteMapping("/tableau/{id}")
-    public ResponseEntity<Void> deleteTableau(@PathVariable Long id) {
-        tableauService.deleteById(id);
-        return ResponseEntity.noContent().build();
-    }*/
+
 }

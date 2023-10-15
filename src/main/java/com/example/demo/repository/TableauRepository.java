@@ -12,4 +12,5 @@ import java.util.List;
 @Repository
 public interface TableauRepository extends JpaRepository<Tableau, Long> {
     List<Tableau> findByCollectionId(Long collectionId);
+    boolean existsByNom(String nom);
 }

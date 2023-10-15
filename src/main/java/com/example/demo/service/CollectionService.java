@@ -17,6 +17,9 @@ public class CollectionService {
     public Collection createCollection(Collection collection) {
         return collectionRepository.save(collection);
     }
+    public Collection getCollectionById(Long id) {
+        return collectionRepository.findById(id).orElse(null);
+    }
 
     public List<Collection> getAllCollections() {
         return collectionRepository.findAll();

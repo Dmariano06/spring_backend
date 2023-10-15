@@ -29,4 +29,21 @@ public class CollectionController {
         List<Collection> collections = collectionService.getAllCollections();
         return new ResponseEntity<>(collections, HttpStatus.OK);
     }
+    @CrossOrigin(origins = "*")
+    @GetMapping("/{id}")
+    public ResponseEntity<Collection> getCollectionById(@PathVariable Long id) {
+        try {
+            Collection collection = collectionService.getCollectionById(id);
+
+            if (collection != null) {
+                return new ResponseEntity<>(collection, HttpStatus.OK);
+            } else {
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
+        } catch (Exception e) {
+            // Log the exception for further investigation
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 }
