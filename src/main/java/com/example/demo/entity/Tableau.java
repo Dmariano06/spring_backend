@@ -16,7 +16,7 @@ public class Tableau {
     @JoinColumn(name = "collection_id")
     private Collection collection;
 
-    @Column(name = "collectionbyid")
+    @Column(name = "collectionid")
     private Long collectionId;
 
     public Collection getCollection() {

@@ -61,7 +61,7 @@ public class TableauController {
 
 
     @CrossOrigin(origins = "*")
-    @GetMapping("/byCollection/{collectionId}")
+    @GetMapping("/byCollection/{collection_id}")
     public ResponseEntity<List<Tableau>> getTableauxByCollection(@PathVariable Long collectionId) {
         List<Tableau> tableaux = tableauService.getTableauxByCollectionId(collectionId);
         return new ResponseEntity<>(tableaux, HttpStatus.OK);
