@@ -26,43 +26,20 @@ public class TableauController {
         this.tableauService = tableauService;
     }
 
-
- /*   @CrossOrigin(origins = "*")
-    @GetMapping("/tableau/{id}")
-    public Tableau getTableauById(@PathVariable Long id) {
-        return tableauService.findById(id).orElse(null);
-    }*/
-
-    @CrossOrigin(origins = "*")
     @PostMapping
     public ResponseEntity<Tableau> createTableau(@RequestBody Tableau tableau) {
-        Tableau createdTableau = tableauService.saveTableau(tableau);
-        return new ResponseEntity<>(createdTableau, HttpStatus.CREATED);
+        Tableau savedTableau = tableauService.saveTableau(tableau);
+        return new ResponseEntity<>(savedTableau, HttpStatus.CREATED);
     }
-    @CrossOrigin(origins = "*")
-    @PutMapping("/{id}")
-    public Tableau updateTableau(@PathVariable Long id, @RequestBody Tableau tableau) {
-        tableau.setId(id);
-        return tableauService.saveTableau(tableau);
-    }
+
+
 
     @CrossOrigin(origins = "*")
     @GetMapping
-    public List<Tableau> getAllTableaux() {
-        return tableauService.getAllTableaux();
-    }
-
-
-    @CrossOrigin(origins = "*")
-    @GetMapping("/byCollection/{collectionId}")
-    public ResponseEntity<List<Tableau>> getTableauxByCollection(@PathVariable Long collectionId) {
-        List<Tableau> tableaux = tableauService.getTableauxByCollectionId(collectionId);
+    public ResponseEntity<List<Tableau>> getAllTableaux() {
+        List<Tableau> tableaux = tableauService.getAllTableaux();
         return new ResponseEntity<>(tableaux, HttpStatus.OK);
     }
-  /*  @CrossOrigin(origins = "*")
-    @DeleteMapping("/tableau/{id}")
-    public ResponseEntity<Void> deleteTableau(@PathVariable Long id) {
-        tableauService.deleteById(id);
-        return ResponseEntity.noContent().build();
-    }*/
+
+
 }

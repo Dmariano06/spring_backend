@@ -1,5 +1,7 @@
 package com.example.demo.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 @Entity
@@ -12,24 +14,18 @@ public class Tableau {
     private String nom;
 
     private String description;
-    @ManyToOne
+
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    @JsonIgnore
     @JoinColumn(name = "collection_id")
     private Collection collection;
 
-    @Column(name = "collectionid")
-    private Long collectionId;
+
 
     public Collection getCollection() {
         return collection;
     }
 
-    public Long getCollectionId() {
-        return collectionId;
-    }
-
-    public void setCollectionId(Long collectionId) {
-        this.collectionId = collectionId;
-    }
 
     public void setCollection(Collection collection) {
         this.collection = collection;
