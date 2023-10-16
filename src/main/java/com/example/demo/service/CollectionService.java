@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CollectionService {
@@ -41,5 +42,27 @@ public class CollectionService {
         collectionRepository.save(collection);
 
         return savedTableau;
+    }
+    public Collection updateCollection(Long id, Collection updatedCollection) {
+        Optional<Collection> optionalCollection = collectionRepository.findById(id);
+
+        if (optionalCollection.isPresent()) {
+            Collection existingCollection = optionalCollection.get();
+            // Mettez à jour les propriétés nécessaires de la collection existante avec les valeurs de la collection mise à jour
+            existingCollection.setNom(updatedCollection.getNom());
+            // ... Autres propriétés ...
+
+            return collectionRepository.save(existingCollection);
+        } else {
+            return null;
+        }
+    }
+
+    public void deleteCollection(Long id) {
+        if (collectionRepository.existsById(id)) {
+            collectionRepository.deleteById(id);
+        } else {
+         return;
+        }
     }
 }

@@ -35,4 +35,18 @@ public class TableauService {
     public Tableau saveTableau(Tableau tableau) {
         return tableauRepository.save(tableau);
     }
+    public void deleteTableau(Long id) {
+        tableauRepository.deleteById(id);
+    }
+
+    public Tableau updateTableau(Long id, Tableau updatedTableau) {
+        if (tableauRepository.existsById(id)) {
+            updatedTableau.setId(id);
+            return tableauRepository.save(updatedTableau);
+        }
+        return null;
+    }
+    public Optional<Tableau> getTableauById(Long id) {
+        return tableauRepository.findById(id);
+    }
 }

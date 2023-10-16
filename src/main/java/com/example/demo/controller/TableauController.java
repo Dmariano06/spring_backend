@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @CrossOrigin(origins = "*")
 @RestController
@@ -39,6 +40,26 @@ public class TableauController {
     public ResponseEntity<List<Tableau>> getAllTableaux() {
         List<Tableau> tableaux = tableauService.getAllTableaux();
         return new ResponseEntity<>(tableaux, HttpStatus.OK);
+    }
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteTableau(@PathVariable Long id) {
+        tableauService.deleteTableau(id);
+        return ResponseEntity.noContent().build();
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Tableau> updateTableau(@PathVariable Long id, @RequestBody Tableau updatedTableau) {
+        Tableau tableau = tableauService.updateTableau(id, updatedTableau);
+        if (tableau != null) {
+            return ResponseEntity.ok(tableau);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+    @GetMapping("/{id}")
+    public ResponseEntity<Tableau> getTableauById(@PathVariable Long id) {
+        Optional<Tableau> tableau = tableauService.getTableauById(id);
+        return tableau.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
 

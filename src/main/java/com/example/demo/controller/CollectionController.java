@@ -43,4 +43,17 @@ public class CollectionController {
         Tableau savedTableau = collectionService.addTableauToCollection(collectionId, tableau);
         return new ResponseEntity<>(savedTableau, HttpStatus.CREATED);
     }
+    @PutMapping("/{id}")
+    public ResponseEntity<Collection> updateCollection(
+            @PathVariable Long id,
+            @RequestBody Collection updatedCollection) {
+        Collection updated = collectionService.updateCollection(id, updatedCollection);
+        return ResponseEntity.ok(updated);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteCollection(@PathVariable Long id) {
+        collectionService.deleteCollection(id);
+        return ResponseEntity.noContent().build();
+    }
 }
